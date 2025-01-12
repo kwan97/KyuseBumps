@@ -13,4 +13,12 @@ public class FileModel {
     private String brdNm;
     private Date regDts;
 
+    private String cellNo;
+    private String cellNm;
+
+    private String rowNo;
+    private String rowNm;
+
+    private String columnValue;
+
 }

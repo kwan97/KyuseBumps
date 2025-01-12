@@ -1,6 +1,5 @@
 package com.kwan.business.controller.Main;
 
-import com.kwan.business.service.BoardService;
 import com.kwan.business.service.MainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,6 @@ public class HomeController {
 
     @Autowired
     private MainService mainServie;
-    @Autowired
-    private BoardService boardService;
-
 
     @RequestMapping("/home")
     public ModelAndView home(ModelAndView mv) {
