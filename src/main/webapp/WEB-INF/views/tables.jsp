@@ -121,15 +121,15 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody>
-                                    <tr>
-                                        <td style="text-align: center">1</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>2011/01/25</td>
-                                        <td>test</td>
-                                        <td>$112,000</td>
-                                    </tr>
+                                    <tbody id="tableBody">
+<%--                                    <tr>--%>
+<%--                                        <td style="text-align: center">1</td>--%>
+<%--                                        <td>Customer Support</td>--%>
+<%--                                        <td>New York</td>--%>
+<%--                                        <td>2011/01/25</td>--%>
+<%--                                        <td>test</td>--%>
+<%--                                        <td>$112,000</td>--%>
+<%--                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
@@ -161,17 +161,42 @@
 
     $('#insertBtn').on('click', function () {
         alert('hi')
-        // const fileData = $("#file").prop('files')[0];//첨부 파일
-        //
-        // // formData.append("file", fileData);
-        //
+        const fileData = $("#file").prop('files')[0];//첨부 파일
+
+        // formData.append("file", fileData);
+
         // let formData = $('#saveForm').serialize();
-        //
-        // $.post('/file/readFile').done(function (data) {
-        //     cosole.log(data);
-        // }).fail(function (date) {
-        //     console.log('ERROR:: ', data);
-        // })
+        let formData = new FormData();
+        formData.append("file", fileData);
+
+        $.ajax({
+            type: "POST",
+            cache: false,
+            processData: false,  //false로 선언 시 formData를 string으로 변환하지 않음
+            contentType: false,  //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
+            data: formData,
+            url: "/file/readFile",
+            success: function (data) {
+                let temp = '';
+
+                for (let i = 0; data.length; i++) {
+                    temp += '<tr>';
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '   <td>'+data[i].val()+'</td>'
+                    temp += '</tr>'
+                }
+
+                $('#tableBody').html(temp);
+            },
+            error: function (data) {
+                console.log('ERROR:: ', data);
+            }
+        });
+
     });
 
     function removeFile() {
