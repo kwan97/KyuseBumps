@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.12'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'war' // jsp 사용시 필수 요소
+}
+
+group = 'com.kwan'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' //jsp
+	implementation 'javax.servlet:jstl' //jsp
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' //jsp 사용시 필수 요소
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.batch:spring-batch-test'
+//	testImplementation 'org.springframework.security:spring-security-test'
+
+//	runtimeOnly 'com.h2database:h2' //H2 DB(임시용)
+//	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+
+	runtimeOnly 'mysql:mysql-connector-java' //MySql DB
+	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.33' //mySql DB
+
+	//apache.poi
+	implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+//한글 깨짐현상 해결 설정
+tasks.withType(JavaCompile){
+	options.encoding = "UTF-8"
+}
