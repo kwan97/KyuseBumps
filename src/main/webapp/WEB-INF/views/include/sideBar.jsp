@@ -22,26 +22,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Interface
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-           aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>페이지 설정</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/buttons">버튼</a>
-                <a class="collapse-item" href="/cards">카드섹션</a>
-            </div>
-        </div>
-    </li>
-
 <%--    <!-- Nav Item - Utilities Collapse Menu -->--%>
 <%--    <li class="nav-item">--%>
 <%--        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--%>
@@ -61,12 +41,9 @@
 <%--        </div>--%>
 <%--    </li>--%>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        Charts/Graphs
     </div>
 
     <!-- Nav Item - Tables -->
@@ -83,6 +60,53 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>주문별 차트</span>
         </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Search
+    </div>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="/tables">
+            <i class="fas fa-fw fa-table"></i>
+            <span>스토어 한눈에보기</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="/charts">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>지역별 스토어 리스트</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+           aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>페이지 설정</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/buttons">버튼</a>
+                <a class="collapse-item" href="/cards">카드섹션</a>
+            </div>
+        </div>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
