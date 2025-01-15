@@ -111,25 +111,20 @@
                                         <col width="10%">
                                     </colgroup>
                                     <thead>
-                                    <tr style="text-align: center">
-                                        <th scope="col">번호</th>
-                                        <th scope="col">제목</th>
-                                        <th scope="col">내용</th>
-                                        <th scope="col">작성일</th>
-                                        <th scope="col">작성자</th>
-                                        <th scope="col">비고</th>
-                                    </tr>
+                                        <tr style="text-align: center">
+                                            <th scope="col">번호</th>
+                                            <th scope="col">구입일</th>
+                                            <th scope="col">상품명</th>
+                                            <th scope="col">상품코드</th>
+                                            <th scope="col">재질</th>
+                                            <th scope="col">수량</th>
+                                            <th scope="col">가격</th>
+                                            <th scope="col">구입처</th>
+                                        </tr>
                                     </thead>
 
                                     <tbody id="tableBody">
-<%--                                    <tr>--%>
-<%--                                        <td style="text-align: center">1</td>--%>
-<%--                                        <td>Customer Support</td>--%>
-<%--                                        <td>New York</td>--%>
-<%--                                        <td>2011/01/25</td>--%>
-<%--                                        <td>test</td>--%>
-<%--                                        <td>$112,000</td>--%>
-<%--                                    </tr>--%>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -160,43 +155,44 @@
     });
 
     $('#insertBtn').on('click', function () {
-        alert('hi')
         const fileData = $("#file").prop('files')[0];//첨부 파일
 
-        // formData.append("file", fileData);
+        if (fileData == null) {
+            alert('파일을 업로드해주세요.');
+        } else {
+            // formData.append("file", fileData);
+            // let formData = $('#saveForm').serialize();
 
-        // let formData = $('#saveForm').serialize();
-        let formData = new FormData();
-        formData.append("file", fileData);
+            let formData = new FormData();
+            formData.append("file", fileData);
 
-        $.ajax({
-            type: "POST",
-            cache: false,
-            processData: false,  //false로 선언 시 formData를 string으로 변환하지 않음
-            contentType: false,  //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
-            data: formData,
-            url: "/file/readFile",
-            success: function (data) {
-                let temp = '';
+            $.ajax({
+                type: "POST",
+                cache: false,
+                processData: false,  //false로 선언 시 formData를 string으로 변환하지 않음
+                contentType: false,  //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
+                data: formData,
+                url: "/file/readFile",
+                success: function (data) {
+                    let temp = '';
+                    for (let i = 0; i < Object.values(data).length; i++) {
+                        temp += '<tr>';
+                        temp += '<td style="text-align: center;" ">' + (i+1) + '</td>';
+                        // 열값 넣어주기
+                        for (let j = 0; j < Object.values(data)[i].length; j++){
+                            temp += '   <td style="text-align: center;">'+Object.values(data)[i][j]+'</td>';
+                        }
 
-                for (let i = 0; data.length; i++) {
-                    temp += '<tr>';
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '   <td>'+data[i].val()+'</td>'
-                    temp += '</tr>'
+                        temp += '</tr>';
+                    }
+
+                    $('#tableBody').html(temp);
+                },
+                error: function (data) {
+                    alert('!!!!업로드 실패!!!!');
                 }
-
-                $('#tableBody').html(temp);
-            },
-            error: function (data) {
-                console.log('ERROR:: ', data);
-            }
-        });
-
+            });
+        }
     });
 
     function removeFile() {

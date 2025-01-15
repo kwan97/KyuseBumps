@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class FileController {
@@ -25,7 +27,7 @@ public class FileController {
      * @since 2024.01.21
      */
     @PostMapping("/file/readFile")
-    public List<String> readFile(@RequestParam("file") MultipartFile file) throws Exception {
+    public LinkedHashMap<Integer, List<String>> readFile(@RequestParam("file") MultipartFile file) throws Exception {
 
         return fileService.readFile(file);
     }
