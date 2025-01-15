@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -81,20 +82,17 @@ public class FileService {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     value = String.valueOf( dateFormat.format(cell.getDateCellValue()) );
                 } else {
-//                    if () {
-//                        DecimalFormat wonFormat = new DecimalFormat("###,###");
-//
-//                    } else {
-                        double doubleVal = cell.getNumericCellValue() ;
+                    double doubleVal = cell.getNumericCellValue() ;
+//                    DecimalFormat df = new DecimalFormat("###,###");
+                    // 정수/실수 구분 로직
+                    if (doubleVal == Math.floor(doubleVal)) {
+                        int intVal = (int) cell.getNumericCellValue();
 
-                        // 정수/실수 구분 로직
-                        if (doubleVal == Math.floor(doubleVal)) {
-                            int intVal = (int) cell.getNumericCellValue();
-                            value = String.valueOf(intVal);
-                        } else {
-                            value = String.valueOf(doubleVal);
-                        }
-//                    }
+                        //NumberFormat.getInstance().format() => 천단위마다 콤마
+                        value = String.valueOf( NumberFormat.getInstance().format(intVal) );
+                    } else {
+                        value = String.valueOf( NumberFormat.getInstance().format(doubleVal) );
+                    }
                 }
                 break;
             case STRING:
