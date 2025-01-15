@@ -1,11 +1,12 @@
 package com.kwan.business.param;
 
+import com.kwan.business.core.BaseParam;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class FileParam {
+public class FileParam extends BaseParam {
     private int num;
     private String fileNm;
 
