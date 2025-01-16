@@ -65,7 +65,7 @@
         <div id="content">
             <jsp:include page="/WEB-INF/views/include/navMenu.jsp"/>
             <div class="container-fluid">
-                <h1 class="h3 mb-2 text-gray-800">구매/주문 이력 조회</h1>
+                <h1 class="h3 mb-2 text-gray-800">구매 이력 조회</h1>
 <%--                <p class="mb-4">테이블 설정 관련 참고 사이트:--%>
 <%--                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>--%>
 <%--                </p>--%>
@@ -74,7 +74,7 @@
                     <div class="card shadow mb-4">
 
                         <div class="card-header py-3">
-                            <h5 class="m-0 font-weight-bold text-primary">구매/주문 이력 파일 업로드</h5>
+                            <h5 class="m-0 font-weight-bold text-primary">구매 이력 조회</h5>
                         </div>
 
                         <div class="card-header py-3">
@@ -85,8 +85,7 @@
                                 <input type="file" id="file" name="file"/>
                             </div>
                             <div>
-                                <button type="button" onclick="addFile();" id="insertBtn"
-                                        class="btn btn-primary btn-icon-split btn-sm">
+                                <button type="button" id="insertBtn" class="btn btn-primary btn-icon-split btn-sm">
                                     <span class="icon text-white-50">+</span>
                                     <span class="text">업로드</span>
                                 </button>
@@ -103,12 +102,14 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <caption></caption>
                                     <colgroup>
+                                        <col width="7%">
                                         <col width="10%">
-                                        <col width="20%">
+                                        <col width="*">
+                                        <col width="*">
                                         <col width="*">
                                         <col width="10%">
                                         <col width="*">
-                                        <col width="10%">
+                                        <col width="*">
                                     </colgroup>
                                     <thead>
                                         <tr style="text-align: center">
@@ -124,7 +125,6 @@
                                     </thead>
 
                                     <tbody id="tableBody">
-
                                     </tbody>
                                 </table>
                             </div>
@@ -154,6 +154,11 @@
         $("#fileInputBox").val(fileName);
     });
 
+    function removeFile() {
+        $('#fileInputBox').val('');
+        $('#file').val('');
+    }
+
     $('#insertBtn').on('click', function () {
         const fileData = $("#file").prop('files')[0];//첨부 파일
 
@@ -174,29 +179,34 @@
                 data: formData,
                 url: "/file/readFile",
                 success: function (data) {
-                    let temp = '';
-                    for (let i = 0; i < Object.values(data).length; i++) {
-                        temp += '<tr>';
-                        temp += '<td style="text-align: center;" ">' + (i+1) + '</td>';
-                        // 열값 넣어주기
-                        for (let j = 0; j < Object.values(data)[i].length; j++){
-                            temp += '   <td style="text-align: center;">'+Object.values(data)[i][j]+'</td>';
+                    if (data.success){
+                        let temp = '';
+
+                        for (let i = 0; i < Object.values(data.resultMap.fileModelList).length; i++) {
+                            temp += '<tr>';
+                            temp += '<td style="text-align: center;" ">' + (i+1) + '</td>';
+                            for (let j = 0; j < Object.values(data.resultMap.fileModelList)[i].length; j++){
+                                temp += '<td style="text-align: center;">'+Object.values(data.resultMap.fileModelList)[i][j]+'</td>';
+                            }
+                            temp += '</tr>'
                         }
-
-                        temp += '</tr>';
+                        temp += '<tr>' +
+                            '<td style="text-align: center; border-top-width: 5px;"><strong>Total</strong></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"><strong>'+data.resultMap.totalNum+' 개</strong></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"><strong>'+data.resultMap.price+' 원</strong></td>' +
+                            '<td style="text-align: center; border-top-width: 5px;"></td>' +
+                            '</tr>';
+                        $('#tableBody').html(temp);
+                    } else {
+                        alert(data.message);
+                        return;
                     }
-
-                    $('#tableBody').html(temp);
-                },
-                error: function (data) {
-                    alert('!!!!업로드 실패!!!!');
                 }
             });
         }
     });
-
-    function removeFile() {
-        $('#fileInputBox').val('');
-        $('#file').val('');
-    }
 </script>

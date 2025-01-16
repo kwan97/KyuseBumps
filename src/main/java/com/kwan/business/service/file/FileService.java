@@ -1,6 +1,7 @@
 package com.kwan.business.service.file;
 
-import com.kwan.business.model.file.FileModel;
+import com.kwan.business.core.JsonResponseObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -9,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.poi.ss.usermodel.DateUtil;
 
@@ -21,18 +21,20 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-
+@Slf4j
 @Service
 public class FileService {
 
-    public LinkedHashMap<Integer, List<String>> readFile(MultipartFile file) throws Exception {
+    public JsonResponseObject readFile(JsonResponseObject response, MultipartFile file) throws Exception {
 
         InputStream inputStream = file.getInputStream();// 파일 읽기
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream); // 엑셀 파일 파싱
         XSSFSheet sheet = workbook.getSheetAt(0); // 엑셀 파일의 첫번째 (0) 시트지
 
-        LinkedHashMap<Integer, List<String>> fileModelList = new LinkedHashMap<>();
+        HashMap<Integer, List<String>> fileModelList = new HashMap<>();
         List<String> fileValues = new ArrayList<>();
+        Long price = 0L;
+        int totalNum = 0;
 
         // 행의 수
         int rows = sheet.getPhysicalNumberOfRows();
@@ -49,23 +51,54 @@ public class FileService {
                     String value = "";//초기화
 
                     // 12반쩨 열이 강의시간(강의실)
-                    // r열 c행의 cell이 비어있을 때 혹은 시간표 열이 아닐때
+                    // r열 c행의 cell이 비어있을 때 continue
                     if (cell == null || cell.getCellType().equals(CellType.BLANK)) {
-                        continue;
+                        response.setMessage("공백의 셀값이 존재합니다.");
+                        response.setSuccess(false);
+                        return response;
                     } else {
                         // 타입별로 내용 읽기
                         String resultValue = conversionExcelValue(cell, value);
 
-                        fileValues.add(resultValue);
-                        fileModelList.put(r, fileValues);
-                    }
+                        if (resultValue.equals("Error")) {
+                            response.setMessage("올바르지 않은 셀값이 존재합니다.");
+                            response.setSuccess(false);
+                            return response;
+                        } else {
+                            fileValues.add(resultValue);
+                            fileModelList.put(r, fileValues);
 
+                            if (c == 4) {
+                                if (resultValue.matches("[+-]?\\d*(\\.\\d+)?")) {
+                                    totalNum += Integer.valueOf(resultValue);
+                                } else {
+                                    response.setMessage("올바르지 않은 셀값이 존재합니다.");
+                                    response.setSuccess(false);
+                                    return response;
+                                }
+                            } else if (c == 5) {
+                                if (resultValue.replaceAll("[,]", "").matches("[+-]?\\d*(\\.\\d+)?")) {
+                                    price += Long.valueOf(resultValue.replaceAll("[.,]", ""));
+                                } else {
+                                    response.setMessage("올바르지 않은 셀값이 존재합니다.");
+                                    response.setSuccess(false);
+                                    return response;
+                                }
+                            }
+                        }
+
+                    }
                 }
+                response.addResultMapItem("totalNum", totalNum);
+                response.addResultMapItem("price", NumberFormat.getInstance().format(price));
+                response.addResultMapItem("fileModelList", fileModelList);
+                response.setSuccess(true);
+
+                inputStream.close();
             }
-            inputStream.close();
         }
 
-        return fileModelList;
+        return response;
     }
 
     /**
@@ -80,10 +113,10 @@ public class FileService {
             case NUMERIC:
                 if(DateUtil.isCellDateFormatted(cell)) {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    value = String.valueOf( dateFormat.format(cell.getDateCellValue()) );
+                    value = dateFormat.format(cell.getDateCellValue());
                 } else {
                     double doubleVal = cell.getNumericCellValue() ;
-//                    DecimalFormat df = new DecimalFormat("###,###");
+
                     // 정수/실수 구분 로직
                     if (doubleVal == Math.floor(doubleVal)) {
                         int intVal = (int) cell.getNumericCellValue();
@@ -102,10 +135,13 @@ public class FileService {
                 value = cell.getBooleanCellValue() + "";
                 break;
             case ERROR:
-                value = cell.getErrorCellValue() + "";
+                value = "Error";
+                log.error("Error Log: {}", cell.getErrorCellValue());
+                break;
+            default:
+                value = "Error";
                 break;
         }
-
         return value;
     }
 }
