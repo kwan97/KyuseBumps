@@ -1,4 +1,4 @@
-package com.kwan.business.param;
+package com.kwan.business.param.file;
 
 import com.kwan.business.core.BaseParam;
 import lombok.Getter;

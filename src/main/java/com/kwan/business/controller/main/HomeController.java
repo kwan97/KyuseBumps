@@ -1,6 +1,6 @@
-package com.kwan.business.controller.Main;
+package com.kwan.business.controller.main;
 
-import com.kwan.business.service.MainService;
+import com.kwan.business.service.main.MainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

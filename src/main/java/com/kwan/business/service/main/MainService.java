@@ -1,7 +1,6 @@
-package com.kwan.business.service;
+package com.kwan.business.service.main;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Service

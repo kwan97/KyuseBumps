@@ -1,7 +1,7 @@
 package com.kwan.business.dao;
 
 import com.kwan.business.model.file.FileModel;
-import com.kwan.business.param.FileParam;
+import com.kwan.business.param.file.FileParam;
 
 import java.util.List;
 
