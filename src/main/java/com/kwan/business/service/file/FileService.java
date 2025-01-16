@@ -68,7 +68,7 @@ public class FileService {
                             fileValues.add(resultValue);
                             fileModelList.put(r, fileValues);
 
-                            if (c == 4) {
+                            if (c == 4) { //수량 항목
                                 if (resultValue.matches("[+-]?\\d*(\\.\\d+)?")) {
                                     totalNum += Integer.valueOf(resultValue);
                                 } else {
@@ -76,7 +76,7 @@ public class FileService {
                                     response.setSuccess(false);
                                     return response;
                                 }
-                            } else if (c == 5) {
+                            } else if (c == 5) { //가격 항목
                                 if (resultValue.replaceAll("[,]", "").matches("[+-]?\\d*(\\.\\d+)?")) {
                                     price += Long.valueOf(resultValue.replaceAll("[.,]", ""));
                                 } else {

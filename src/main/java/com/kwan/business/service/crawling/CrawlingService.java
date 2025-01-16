@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CrawlingService {
 
-    public List<WebElement> getCrawlingInfo(JsonResponseObject response) throws Exception {
+    public JsonResponseObject getCrawlingInfo(JsonResponseObject response) throws Exception {
         // 크롬 드라이버 설정
         System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 
@@ -27,25 +27,34 @@ public class CrawlingService {
 
         //크롤링 할 웹사이트 url
         driver.get("https://kream.co.kr/search?keyword=베이프%20의류&tab=products");
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 
         //크롤링 할 리스트 긁어오기
-        List<WebElement> elementList = driver.findElements( By.cssSelector("div .search_result_list .search_result_item .product") );
-        List<WebElement> finalElementList = new ArrayList<>();
-        List<WebElement> elementList2 = new ArrayList<>();
-//                driver.findElements( By.cssSelector("div .search_result_list .search_result_item .product") );
-        for (int i = 0; i < elementList.size(); i++) {
-            elementList2 = driver.findElements( By.cssSelector("div .search_result_list > search_result_item[data-result-index[data-result-index="+i+"]]") );
-        }
+//        List<WebElement> elementList = driver.findElements( By.cssSelector("div .search_result_list .search_result_item .product") );
+        List<WebElement> titleList = driver.findElements( By.cssSelector("div .product_info_area .title .product_info_product_name .translated_name") );
+        List<WebElement> priceList = driver.findElements( By.cssSelector("div .price .amount") );
 
-//        if(elementList.size() > 0) {
-//            response.addResultMapItem("kream", elementList.get(0));
-//            response.setSuccess(true);
-//            response.setMessage("크롤링 성공");
-//        }
+        String title = "";
+        String price = "";
+        List<CrawlingModel> crawlingModels = new ArrayList<>();
+        for (int i = 0; i < titleList.size(); i++) {
+            WebElement webTitle = titleList.get(i);
+            WebElement webPrice = priceList.get(i);
+
+            CrawlingModel model = new CrawlingModel();
+            model.setTitle(webTitle.getText());
+            model.setPrice(webPrice.getText());
+//            title = webTitle.getText();
+//            price = webPrice.getText();
+            crawlingModels.add(model);
+
+//            response.addResultMapItem("title"+i, title);
+//            response.addResultMapItem("price"+i, price);
+        }
+        response.addResultMapItem("crawlingModels", crawlingModels);
 
         driver.quit();
 
-        return elementList2;
+        return response;
     }
 }

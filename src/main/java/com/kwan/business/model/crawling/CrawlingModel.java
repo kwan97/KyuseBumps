@@ -9,6 +9,7 @@ import lombok.Setter;
 public class CrawlingModel extends BaseModel {
 
     private String title;
+    private String price;
     private String info;
     private String url;
 }
