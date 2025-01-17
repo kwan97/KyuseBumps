@@ -1,6 +1,7 @@
 package com.kwan.business.controller.crawling;
 
 import com.kwan.business.core.JsonResponseObject;
+import com.kwan.business.param.product.ProductParam;
 import com.kwan.business.service.crawling.CrawlingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,9 @@ public class CrawlingController {
      * @title 크롤링
      * @since 2025.01.16
      */
-    @GetMapping("/crawling/getCrawlingInfo")
-    public JsonResponseObject getCrawlingInfo(JsonResponseObject response) throws Exception {
+    @PostMapping("/crawling/getCrawlingInfo")
+    public JsonResponseObject getCrawlingInfo(JsonResponseObject response, ProductParam param) throws Exception {
 
-        return crawlingService.getCrawlingInfo(response);
+        return crawlingService.getCrawlingInfo(response, param);
     }
 }

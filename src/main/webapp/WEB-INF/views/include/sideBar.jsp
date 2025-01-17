@@ -72,9 +72,9 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="/tables">
+        <a class="nav-link" href="/productSearch">
             <i class="fas fa-fw fa-table"></i>
-            <span>스토어 한눈에보기</span>
+            <span>상품 시세 조회</span>
         </a>
     </li>
 

@@ -1,14 +1,12 @@
 package com.kwan.business.controller.main;
 
 import com.kwan.business.service.main.MainService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@Slf4j
 public class HomeController {
 
     @Autowired
@@ -28,6 +26,12 @@ public class HomeController {
 
     @RequestMapping("/charts")
     public ModelAndView charts(ModelAndView mv) {
+
+        return mv;
+    }
+
+    @RequestMapping("/productSearch")
+    public ModelAndView productSearch(ModelAndView mv) {
 
         return mv;
     }
