@@ -67,9 +67,6 @@
             <jsp:include page="/WEB-INF/views/include/navMenu.jsp"/>
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">상품 시세 조회</h1>
-                <div id="test">
-
-                </div>
                 <%--                <p class="mb-4">테이블 설정 관련 참고 사이트:--%>
                 <%--                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>--%>
                 <%--                </p>--%>
@@ -81,30 +78,54 @@
 
                     <div class="card-header py-3">
                         <form id="crawlingForm">
-                            <input type="hidden" id="category" name="category"/>
-                            <div>
-                                <button type="button" id="Kream1" onclick="categoryKream(1)" class="btn btn-primary btn-icon-split btn-sm">
-                                    <span class="icon text-white-50">K</span>
-                                    <span class="text">반팔</span>
-                                </button>
-
-                                <button type="button" id="Kream2" onclick="categoryKream(2)" class="btn btn-primary btn-icon-split btn-sm">
-                                    <span class="icon text-white-50">K</span>
-                                    <span class="text">후드집업</span>
-                                </button>
+                            <div class="input-group" style="width: 500px;">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
                             </div>
+<%--                            <input type="text" class="form-control form-control-sm" placeholder="" aria-controls="검색어를 입력하세요"></label>--%>
+<%--                            <div>--%>
+<%--&lt;%&ndash;                                <button type="button" id="Kream0" onclick="categoryKream(0)" class="btn btn-primary btn-icon-split btn-sm">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <span class="icon text-white-50">K</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <span class="text">베이프</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </button>&ndash;%&gt;--%>
 
-                            <div style="margin-top: 10px;">
-                                <button type="button" id="Naver1" onclick="categoryNaver(1)" class="btn btn-primary btn-icon-split btn-sm">
-                                    <span class="icon text-white-50">N</span>
-                                    <span class="text">반팔</span>
-                                </button>
+<%--                                <button type="button" id="Kream1" onclick="categoryKream(1)" class="btn btn-primary btn-icon-split btn-sm">--%>
+<%--                                    <span class="icon text-white-50">K</span>--%>
+<%--                                    <span class="text">반팔</span>--%>
+<%--                                </button>--%>
 
-                                <button type="button" id="Naver2" onclick="categoryNaver(2)" class="btn btn-primary btn-icon-split btn-sm">
-                                    <span class="icon text-white-50">N</span>
-                                    <span class="text">후드집업</span>
-                                </button>
-                            </div>
+<%--                                <button type="button" id="Kream2" onclick="categoryKream(2)" class="btn btn-primary btn-icon-split btn-sm">--%>
+<%--                                    <span class="icon text-white-50">K</span>--%>
+<%--                                    <span class="text">후드집업</span>--%>
+<%--                                </button>--%>
+
+<%--                                <button type="button" id="Kream3" onclick="categoryKream(3)" class="btn btn-primary btn-icon-split btn-sm">--%>
+<%--                                    <span class="icon text-white-50">K</span>--%>
+<%--                                    <span class="text">맨투맨</span>--%>
+<%--                                </button>--%>
+<%--                            </div>--%>
+
+<%--                            <div style="margin-top: 10px;">--%>
+<%--&lt;%&ndash;                                <button type="button" id="Naver0" onclick="categoryNaver(0)" class="btn btn-primary btn-icon-split btn-sm">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <span class="icon text-white-50">N</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <span class="text">베이프</span>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </button>&ndash;%&gt;--%>
+
+<%--                                <button type="button" id="Naver1" onclick="categoryNaver(1)" class="btn btn-primary btn-icon-split btn-sm">--%>
+<%--                                    <span class="icon text-white-50">N</span>--%>
+<%--                                    <span class="text">반팔</span>--%>
+<%--                                </button>--%>
+
+<%--                                <button type="button" id="Naver2" onclick="categoryNaver(2)" class="btn btn-primary btn-icon-split btn-sm">--%>
+<%--                                    <span class="icon text-white-50">N</span>--%>
+<%--                                    <span class="text">후드집업</span>--%>
+<%--                                </button>--%>
+<%--                            </div>--%>
                         </form>
                     </div>
 
@@ -149,10 +170,6 @@
 </html>
 
 <script>
-    $(document).ready(function () {
-        crawlingProductList()
-    })
-
     //Kream용
     function categoryKream(key) {
         let keyword = $('#Kream'+key).find('span:eq(1)').text();
@@ -184,8 +201,8 @@
                         temp += '   <td style="text-align: center;" ">' + (i + 1) + '</td>';
                         temp += '   <td><img src="' + Object.values(data.resultMap.crawlingModelList)[i].imageUrl + '"/></td>';
                         temp += '   <td style="text-align: center;"><a href="'
-                            + Object.values(data.resultMap.crawlingModelList)[i].accessUrl + '" target="_blank">'
-                            + Object.values(data.resultMap.crawlingModelList)[i].title + '</a></td>';
+                                    + Object.values(data.resultMap.crawlingModelList)[i].accessUrl + '" target="_blank">'
+                                    + Object.values(data.resultMap.crawlingModelList)[i].title + '</a></td>';
                         temp += '   <td style="text-align: center;">' + Object.values(data.resultMap.crawlingModelList)[i].price + '</td>';
                         temp += '</tr>'
                     }
