@@ -28,8 +28,9 @@ public class CrawlingService {
 
         //크롤링 할 웹사이트 url
         WebDriver driver = new ChromeDriver(options);
-        if (param.getCategory() == null || param.getCategory().equals("")) {
+        if (param.getCategory().equals("베이프")) {
             driver.get("https://kream.co.kr/search?keyword=베이프&tab=products");
+//            driver.get("https://search.shopping.naver.com/ns/search?query=베이프&prevQuery=");
         } else {
             driver.get("https://kream.co.kr/search?keyword=베이프"+param.getCategory()+"&tab=products");
         }
@@ -37,29 +38,21 @@ public class CrawlingService {
 
         //제목 크롤링
         List<WebElement> titleList = driver.findElements( By.cssSelector("div .product_info_area .title .product_info_product_name .translated_name") );
-
         //접속 URL 크롤링
         List<WebElement> accessUrlList = driver.findElements( By.cssSelector("div .search_result_item .product_card > a") );
-
         //가격 크롤링
         List<WebElement> priceList = driver.findElements( By.cssSelector("div .price .amount") );
-
         //이미지 크롤링
         List<WebElement> imageUrlList = driver.findElements( By.cssSelector("div .product .product_img .image") );
 
         List<CrawlingModel> crawlingModelList = new ArrayList<>();
 
         for (int i = 0; i < titleList.size(); i++) {
-            WebElement webTitle = titleList.get(i);
-            WebElement webPrice = priceList.get(i);
-            WebElement webImageUrl = imageUrlList.get(i);
-            WebElement webAccessUrl = accessUrlList.get(i);
-
             CrawlingModel model = new CrawlingModel();
-            model.setTitle(webTitle.getText());
-            model.setPrice(webPrice.getText());
-            model.setImageUrl(webImageUrl.getAttribute("src"));
-            model.setAccessUrl(webAccessUrl.getAttribute("href"));
+            model.setTitle(titleList.get(i).getText());
+            model.setPrice(priceList.get(i).getText());
+            model.setImageUrl(imageUrlList.get(i).getAttribute("src"));
+            model.setAccessUrl(accessUrlList.get(i).getAttribute("href"));
 
             crawlingModelList.add(model);
         }
