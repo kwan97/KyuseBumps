@@ -8,8 +8,9 @@ import lombok.Setter;
 @Setter
 public class CrawlingModel extends BaseModel {
 
-    private String title;
-    private String price;
-    private String info;
-    private String url;
+    private String title;       /** 제목 */
+    private String price;       /** 가격 */
+    private String accessUrl;   /** 접속 URL */
+    private String imageUrl;    /** 이미지 URL */
+    private String info;        /** 정보 */
 }
