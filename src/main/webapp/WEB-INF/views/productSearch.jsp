@@ -79,10 +79,10 @@
                     <div class="card-header py-3">
                         <form id="crawlingForm">
                             <div class="input-group" style="width: 500px;">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                <input type="text" id="searchText" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for..."
                                        aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
+                                    <button class="btn btn-primary" type="button" onclick="searchProduct()">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                 </div>
@@ -181,6 +181,11 @@
     function categoryNaver(key) {
         let keyword = $('#Naver'+key).find('span:eq(1)').text();
         $('#category').val(keyword);
+        crawlingProductList();
+    }
+
+    function searchProduct() {
+        let keyword = $('#searchText').val();
         crawlingProductList();
     }
 

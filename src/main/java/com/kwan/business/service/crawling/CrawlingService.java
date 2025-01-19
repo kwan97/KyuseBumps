@@ -28,11 +28,11 @@ public class CrawlingService {
 
         //크롤링 할 웹사이트 url
         WebDriver driver = new ChromeDriver(options);
-        if (param.getCategory().equals("베이프")) {
+        if (param.getSearchText().equals("") || param.getSearchText() == null) {
             driver.get("https://kream.co.kr/search?keyword=베이프&tab=products");
 //            driver.get("https://search.shopping.naver.com/ns/search?query=베이프&prevQuery=");
         } else {
-            driver.get("https://kream.co.kr/search?keyword=베이프"+param.getCategory()+"&tab=products");
+            driver.get("https://kream.co.kr/search?keyword=베이프"+param.getSearchText()+"&tab=products");
         }
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
