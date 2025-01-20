@@ -50,7 +50,7 @@
     <li class="nav-item">
         <a class="nav-link" href="/tables">
             <i class="fas fa-fw fa-table"></i>
-            <span>구매/주문 조회</span>
+            <span>사입 상품 업로드</span>
         </a>
     </li>
 
