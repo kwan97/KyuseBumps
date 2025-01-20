@@ -170,22 +170,37 @@
 </html>
 
 <script>
-    //Kream용
-    function categoryKream(key) {
-        let keyword = $('#Kream'+key).find('span:eq(1)').text();
-        $('#category').val(keyword);
-        crawlingProductList();
-    }
+    // $(function () {
+    //     $('#searchText').removeEventListener('keydown', myDivEventHandler);
+    //     $('#searchText').removeEventListener('keyup', myDivEventHandler);
+    //     $('#searchText').removeEventListener('click', myDivEventHandler);
+    //     $('.btn-primary').removeEventListener('keydown', myDivEventHandler);
+    //     $('.btn-primary').removeEventListener('keyup', myDivEventHandler);
+    //     $('.btn-primary').removeEventListener('click', myDivEventHandler);
+    // });
+    //
+    // $('#searchText').on('keydown', function(key) {
+    //     if (key.keyCode == 'Enter') {
+    //         $('.btn-primary').click();
+    //     }
+    // });
 
-    //네이버 스마트스토어용
-    function categoryNaver(key) {
-        let keyword = $('#Naver'+key).find('span:eq(1)').text();
-        $('#category').val(keyword);
-        crawlingProductList();
-    }
+    // //Kream용
+    // function categoryKream(key) {
+    //     let keyword = $('#Kream'+key).find('span:eq(1)').text();
+    //     $('#category').val(keyword);
+    //     crawlingProductList();
+    // }
+    //
+    // //네이버 스마트스토어용
+    // function categoryNaver(key) {
+    //     let keyword = $('#Naver'+key).find('span:eq(1)').text();
+    //     $('#category').val(keyword);
+    //     crawlingProductList();
+    // }
 
     function searchProduct() {
-        let keyword = $('#searchText').val();
+        // let keyword = $('#searchText').val();
         crawlingProductList();
     }
 
