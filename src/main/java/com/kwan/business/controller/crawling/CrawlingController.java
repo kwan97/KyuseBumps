@@ -17,7 +17,7 @@ public class CrawlingController {
     private CrawlingService crawlingService;
 
     /**
-     * @title 크롤링
+     * @title 상품크롤링
      * @since 2025.01.16
      */
     @PostMapping("/crawling/getCrawlingKream")

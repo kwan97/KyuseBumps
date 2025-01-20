@@ -19,9 +19,6 @@
         </a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
 <%--    <!-- Nav Item - Utilities Collapse Menu -->--%>
 <%--    <li class="nav-item">--%>
 <%--        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--%>
@@ -41,9 +38,32 @@
 <%--        </div>--%>
 <%--    </li>--%>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
     <!-- Heading -->
     <div class="sidebar-heading">
-        Charts/Graphs
+        Exchange/Tax
+    </div>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="/exchangeRate">
+            <i class="fas fa-fw fa-table"></i>
+            <span>오늘의 환율</span>
+        </a>
+
+        <a class="nav-link" href="/taxBoard">
+            <i class="fas fa-fw fa-table"></i>
+            <span>관세/수수료 정보</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Product Upload
     </div>
 
     <!-- Nav Item - Tables -->
@@ -55,12 +75,12 @@
     </li>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="/charts">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>주문별 차트</span>
-        </a>
-    </li>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link" href="/charts">--%>
+<%--            <i class="fas fa-fw fa-chart-area"></i>--%>
+<%--            <span>주문별 차트</span>--%>
+<%--        </a>--%>
+<%--    </li>--%>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -76,10 +96,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>상품 시세 조회</span>
         </a>
-    </li>
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
         <a class="nav-link" href="/charts">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>지역별 스토어 리스트</span>

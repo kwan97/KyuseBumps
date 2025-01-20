@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CrawlingModel extends BaseModel {
+public class CrawlingProductModel extends BaseModel {
 
     private String title;       /** 제목 */
     private String price;       /** 가격 */
