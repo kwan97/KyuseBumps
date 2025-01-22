@@ -99,28 +99,28 @@
                                             <c:when test="${item.country eq '일본'}">
                                                 <tr>
                                                     <td style="text-align: center;">${item.country}</td>
-                                                    <td style="text-align: center;">${item.exchangeRate} 엔</td>
+                                                    <td style="text-align: center;"><strong>${item.exchangeRate}</strong> 엔 (Y100)</td>
                                                     <td style="text-align: center;">${item.discribeRate}</td>
                                                 </tr>
                                             </c:when>
                                             <c:when test="${item.country eq '미국'}">
                                                 <tr>
                                                     <td style="text-align: center;">${item.country}</td>
-                                                    <td style="text-align: center;">${item.exchangeRate} 달러</td>
+                                                    <td style="text-align: center;"><strong>${item.exchangeRate}</strong> 달러 ($1)</td>
                                                     <td style="text-align: center;">${item.discribeRate}</td>
                                                 </tr>
                                             </c:when>
                                             <c:when test="${item.country eq '유럽연합'}">
                                                 <tr>
                                                     <td style="text-align: center;">${item.country}(EU)</td>
-                                                    <td style="text-align: center;">${item.exchangeRate} 유로</td>
+                                                    <td style="text-align: center;"><strong>${item.exchangeRate}</strong> 유로 (EUR1)</td>
                                                     <td style="text-align: center;">${item.discribeRate}</td>
                                                 </tr>
                                             </c:when>
                                             <c:when test="${item.country eq '중국'}">
                                                 <tr>
                                                     <td style="text-align: center;">${item.country}</td>
-                                                    <td style="text-align: center;">${item.exchangeRate} 위안</td>
+                                                    <td style="text-align: center;"><strong>${item.exchangeRate}</strong> 위안 (1)</td>
                                                     <td style="text-align: center;">${item.discribeRate}</td>
                                                 </tr>
                                             </c:when>

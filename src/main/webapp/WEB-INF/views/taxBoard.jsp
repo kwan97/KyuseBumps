@@ -73,96 +73,91 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h5 class="m-0 font-weight-bold text-primary">관세/판매 수수료 정보</h5>
+                        <h5 class="m-0 font-weight-bold text-primary">관부과세/판매 수수료</h5>
                     </div>
 
                     <div class="col-lg-6 mb-4" style="max-width:100%">
-                        <div class="card shadow mb-4">
+                        <div class="card shadow mb-4" style="margin-top: 15px;">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">관세 정보</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">관부가세</h6>
                             </div>
                             <div class="card-body">
                                 <div class="text-center">
-<%--                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"--%>
-<%--                                         src="img/undraw_posting_photo.svg" alt="...">--%>
+                                    <p>
+                                        <strong>[일본 의류 수입 관부가세 계산법]</strong><br>
+                                        ( 물품가격 X 13%(관세) ) X 10%(부가세) = <strong>총 납부액</strong>
+                                        <br><br>
+                                    </p>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <caption></caption>
+                                            <colgroup>
+                                                <col width="*">
+                                                <col width="*">
+                                                <col width="*">
+                                            </colgroup>
+                                            <thead>
+                                                <th>품목</th>
+                                                <th>관세율</th>
+                                                <th>부가세율</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>의류, 신발</td>
+                                                    <td>13%</td>
+                                                    <td>10%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>가방, 모자, 시계, 안경</td>
+                                                    <td>8%</td>
+                                                    <td>10%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>화장품, 향수</td>
+                                                    <td>6.5%</td>
+                                                    <td>10%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <p>
-                                    >>일본 의류 수입 관부가세 계산법<br>
-                                    ( 물품가격 X 관세(13%) ) X 부가세(10%) = 총 납부액
-                                    <br><br>
-                                    >>
-                                </p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                    unDraw →</a>
                             </div>
                         </div>
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">판매 수수료</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">스마트스토어 판매 수수료</h6>
                             </div>
                             <div class="card-body">
                                 <div class="text-center">
+                                    <div class="table-responsive">
 <%--                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"--%>
 <%--                                         src="img/undraw_posting_photo.svg" alt="...">--%>
+                                        <table class="table table-bordered">
+                                            <caption></caption>
+                                            <colgroup>
+                                                <col width="*">
+                                                <col width="*">
+                                                <col width="*">
+                                            </colgroup>
+                                            <thead>
+                                                <c:forEach items="${tdList}" var="items" begin="0" end="2">
+                                                    <th>${items}</th>
+                                                </c:forEach>
+                                            </thead>
+                                            <tbody id="mainTr">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <p></p>
-                                    ${taxList}
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                    unDraw →</a>
+                                <p>※ VAT 포함 수수료입니다.</p>
+                                <a target="_blank" rel="nofollow" href="https://help.sell.smartstore.naver.com/faq/content.help?faqId=3558">스마트스토어 이용 안내 페이지 →</a>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <%--                <div class="card shadow mb-4">--%>
-                <%--                    <div class="card-header py-3">--%>
-                <%--                        <h5 class="m-0 font-weight-bold text-primary">판매 수수료 정보</h5>--%>
-                <%--                    </div>--%>
-
-                <%--                    <div class="card-header py-3">--%>
-                <%--                        <form id="sellForm">--%>
-                <%--                            <div class="input-group" style="width: 500px;">--%>
-                <%--                                <input type="text" id="searchText" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for..."--%>
-                <%--                                       aria-label="Search" aria-describedby="basic-addon2">--%>
-                <%--                                <div class="input-group-append">--%>
-                <%--                                    <button class="btn btn-primary" type="button" onclick="searchProduct()">--%>
-                <%--                                        <i class="fas fa-search fa-sm"></i>--%>
-                <%--                                    </button>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </form>--%>
-                <%--                    </div>--%>
-                <%----%>
-                <%--                    <div class="card-body">--%>
-                <%--                        <div class="table-responsive">--%>
-                <%--                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">--%>
-                <%--                                <caption></caption>--%>
-                <%--                                <colgroup>--%>
-                <%--                                    <col width="7%">--%>
-                <%--                                    <col width="*%">--%>
-                <%--                                    <col width="*">--%>
-                <%--                                    <col width="13%">--%>
-                <%--                                </colgroup>--%>
-                <%--                                <thead>--%>
-                <%--                                <tr style="text-align: center">--%>
-                <%--                                    <th scope="col">번호</th>--%>
-                <%--                                    <th scope="col">상품이미지</th>--%>
-                <%--                                    <th scope="col">상품명</th>--%>
-                <%--                                    <th scope="col">가격</th>--%>
-                <%--                                </tr>--%>
-                <%--                                </thead>--%>
-
-                <%--                                <tbody id="tableBody">--%>
-                <%--                                </tbody>--%>
-                <%--                            </table>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%----%>
-                <%--                </div>--%>
-                <%--            </div>--%>
-                <%--        </div>--%>
                 <!--Footer-->
                 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
                 <!-- End of Footer -->
@@ -172,47 +167,30 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
+    </div>
 </body>
 </html>
 
 <script>
-    function searchProduct() {
-        let keyword = $('#searchText').val();
-        crawlingProductList();
-    }
+    $(function () {
+        makeTable()
+    });
 
-    function crawlingProductList() {
-        $.ajax({
-            type: "POST",
-            cache: false,
-            // processData: false,  //false로 선언 시 formData를 string으로 변환하지 않음
-            // contentType: false,  //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
-            data: $('#crawlingForm').serialize(),
-            url: "/crawling/getCrawlingKream",
-            success: function (data) {
-                if (data.success) {
-                    let temp = '';
+    function makeTable() {
+        var arr = new Array();
+        <c:forEach items="${tdList}" var="items">
+            arr.push('${items}');
+        </c:forEach>
 
-                    for (let i = 0; i < Object.values(data.resultMap.crawlingModelList).length; i++) {
-                        temp += '<tr>';
-                        temp += '   <td style="text-align: center;" ">' + (i + 1) + '</td>';
-                        temp += '   <td><img src="' + Object.values(data.resultMap.crawlingModelList)[i].imageUrl + '"/></td>';
-                        temp += '   <td style="text-align: center;"><a href="'
-                            + Object.values(data.resultMap.crawlingModelList)[i].accessUrl + '" target="_blank">'
-                            + Object.values(data.resultMap.crawlingModelList)[i].title + '</a></td>';
-                        temp += '   <td style="text-align: center;">' + Object.values(data.resultMap.crawlingModelList)[i].price + '</td>';
-                        temp += '</tr>'
-                    }
-                    $('#tableBody').html(temp);
-
-                    let html = '';
-                    html += '<img src="' + Object.values(data.resultMap.crawlingModelList)[0].imageUrl + '">'
-                    $('#test').html(html);
-                } else {
-                    alert(data.message);
-                    return;
-                }
+        var html = '';
+        for (var i = 3; i < ${fn:length(tdList)}; i++){
+            if (i % 3 == 0){
+                html += '</tr><tr><td>'+ arr[i] + '</td>';
+            } else {
+                html += '<td>' +arr[i]+ '</td>';
             }
-        })
+        }
+
+        $('#mainTr').html(html);
     }
 </script>
