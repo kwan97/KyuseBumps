@@ -97,10 +97,10 @@
             <span>상품 시세 조회</span>
         </a>
 
-        <a class="nav-link" href="/charts">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>지역별 스토어 리스트</span>
-        </a>
+<%--        <a class="nav-link" href="/charts">--%>
+<%--            <i class="fas fa-fw fa-chart-area"></i>--%>
+<%--            <span>지역별 스토어 리스트</span>--%>
+<%--        </a>--%>
     </li>
 
     <!-- Divider -->
