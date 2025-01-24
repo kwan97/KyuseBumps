@@ -4,6 +4,7 @@ import com.kwan.business.core.JsonResponseObject;
 import com.kwan.business.model.crawling.CrawlingExchageModel;
 import com.kwan.business.model.crawling.CrawlingProductModel;
 import com.kwan.business.param.product.ProductParam;
+import io.netty.util.internal.ObjectUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,57 +21,57 @@ import java.util.List;
 @Service
 public class CrawlingService {
 
-    public ModelAndView getExchagetInfo(ModelAndView mv) {
-        // 크롬 드라이버 설정
-        System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
+    public ModelAndView getExchangeInfo(ModelAndView mv) {
+        try{
+            // 크롬 드라이버 설정
+            System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 
-        // 크롬 옵션 설정
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-//        options.addArguments("--window-size=500,500");
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
+            // 크롬 옵션 설정
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            //options.addArguments("--window-size=500, 500");
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
 
-        //크롤링 할 웹사이트 url
-        WebDriver driver = new ChromeDriver(options);
-        driver.get("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=환율");
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+            //크롤링 할 웹사이트 url
+            WebDriver driver = new ChromeDriver(options);
+            driver.get("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=환율");
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 
-        String url = "#main_pack > section.sc_new.cs_nexchangerate > div.api_subject_bx._exchange_rate_banks_official > div.exchange_bx > div.sct_stock_list > div > ul > li > a > dl ";
+            String url = "#main_pack > section.sc_new.cs_nexchangerate > div.api_subject_bx._exchange_rate_banks_official > div.exchange_bx > div.sct_stock_list > div > ul > li > a > dl ";
 
-        //제목 크롤링
-        List<WebElement> countryList = driver.findElements( By.cssSelector(url+"> dt > span.name") );
-        //접속 URL 크롤링
-        List<WebElement> exchangeList = driver.findElements( By.cssSelector(url+"> dd > span.spt_con.dw > strong") );
-        //가격 크롤링
-        List<WebElement> discribeRateList = driver.findElements( By.cssSelector(url+"> dd > span.spt_con.dw > span.n_ch") );
+            //제목 크롤링
+            List<WebElement> countryList = driver.findElements( By.cssSelector(url + "> dt > span.name") );
+            //접속 URL 크롤링
+            List<WebElement> exchangeList = driver.findElements( By.cssSelector(url + "> dd > span.spt_con.dw > strong") );
+            //가격 크롤링
+            List<WebElement> discribeRateList = driver.findElements( By.cssSelector(url + "> dd > span.spt_con.dw > span.n_ch") );
 
-        List<CrawlingExchageModel> exchangeInfoList = new ArrayList<>();
-        for (int i = 0; i < countryList.size(); i++) {
-            CrawlingExchageModel model = new CrawlingExchageModel();
-            model.setCountry(countryList.get(i).getText());
-            model.setExchangeRate(exchangeList.get(i).getText());
+            List<CrawlingExchageModel> exchangeInfoList = new ArrayList<>();
+            for (int i = 0; i < countryList.size(); i++) {
+                CrawlingExchageModel model = new CrawlingExchageModel();
+                model.setCountry(countryList.get(i).getText());
+                model.setExchangeRate(exchangeList.get(i).getText());
 
-//            String test1 = countryList.get(i).getText();
-//            String test3 = exchangeList.get(i).getText();
-//            String test2 = discribeRateList.get(i).getText();
-            String discribe = "";
-            if (discribeRateList.get(i).getText().contains("-")) {
-                String[] arr = discribeRateList.get(i).getText().split("\n");
-                discribe = arr[0]+" -"+arr[1];
-            } else {
-                String[] arr = discribeRateList.get(i).getText().split("\n");
-                discribe = arr[0]+" +"+arr[1];
+                String discribe = "";
+                if (discribeRateList.get(i).getText().contains("-")) {
+                    String[] arr = discribeRateList.get(i).getText().split("\n");
+                    discribe = arr[0]+" -"+arr[1];
+                } else {
+                    String[] arr = discribeRateList.get(i).getText().split("\n");
+                    discribe = arr[0]+" +"+arr[1];
+                }
+                model.setDiscribeRate(discribe);
+
+                exchangeInfoList.add(model);
             }
-            model.setDiscribeRate(discribe);
-
-            exchangeInfoList.add(model);
+            driver.quit();
+            mv.addObject("exchangeInfoList", exchangeInfoList);
+        } catch (IndexOutOfBoundsException ioobe) {
+            ioobe.printStackTrace();
+        } finally {
+            return mv;
         }
-        driver.quit();
-
-        mv.addObject("exchangeInfoList", exchangeInfoList);
-
-        return mv;
     }
 
     public ModelAndView getTaxInfo(ModelAndView mv) {

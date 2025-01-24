@@ -27,7 +27,7 @@ public class HomeController {
     @RequestMapping("/exchangeRate")
     public ModelAndView exchangeRate(ModelAndView mv) {
 
-        return crawlingService.getExchagetInfo(mv);
+        return crawlingService.getExchangeInfo(mv);
     }
 
     /**
