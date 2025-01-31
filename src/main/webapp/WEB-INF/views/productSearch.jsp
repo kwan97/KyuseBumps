@@ -56,6 +56,10 @@
             line-height: 1.5;
             border-radius: 0.2rem;
         }
+
+         .radioLabel {
+             margin-right: 5px;
+         }
     </style>
 </head>
 
@@ -78,6 +82,30 @@
 
                     <div class="card-header py-3">
                         <form id="crawlingForm">
+                            <div style="margin-bottom: 10px;">
+                                <div class="box_t3_4 box_s4 radi_list mt10 week">
+                                    <label class="radioLabel" data-val="1r">
+                                        <input type="radio" name="searchSite" checked value="naver">
+                                        <strong class="txt2_4 radio_txt">네이버</strong>
+                                    </label>
+                                    
+                                    <label class="radioLabel" data-val="2r">
+                                        <input type="radio" name="searchSite" value="coupang">
+                                        <strong class="txt2_4 radio_txt">쿠팡</strong>
+                                    </label>
+                                    
+                                    <label class="radioLabel" data-val="3r">
+                                        <input type="radio" name="searchSite" value="taobao">
+                                        <strong class="txt2_4 radio_txt">타오바오</strong>
+                                    </label>
+                                    
+                                    <label class="radioLabel" data-val="4r">
+                                        <input type="radio" name="searchSite" value="lacuten">
+                                        <strong class="txt2_4 radio_txt">라쿠텐</strong>
+                                    </label>
+                                </div>
+                            </div>
+
                             <div class="input-group" style="width: 500px;">
                                 <input type="text" id="searchText" name="searchText" class="form-control bg-light border-0 small" placeholder="Search for..."
                                        aria-label="Search" aria-describedby="basic-addon2">
@@ -87,46 +115,19 @@
                                     </button>
                                 </div>
                             </div>
-<%--                            <input type="text" class="form-control form-control-sm" placeholder="" aria-controls="검색어를 입력하세요"></label>--%>
-<%--                            <div>--%>
-<%--&lt;%&ndash;                                <button type="button" id="Kream0" onclick="categoryKream(0)" class="btn btn-primary btn-icon-split btn-sm">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <span class="icon text-white-50">K</span>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <span class="text">베이프</span>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </button>&ndash;%&gt;--%>
-
-<%--                                <button type="button" id="Kream1" onclick="categoryKream(1)" class="btn btn-primary btn-icon-split btn-sm">--%>
-<%--                                    <span class="icon text-white-50">K</span>--%>
-<%--                                    <span class="text">반팔</span>--%>
-<%--                                </button>--%>
-
-<%--                                <button type="button" id="Kream2" onclick="categoryKream(2)" class="btn btn-primary btn-icon-split btn-sm">--%>
-<%--                                    <span class="icon text-white-50">K</span>--%>
-<%--                                    <span class="text">후드집업</span>--%>
-<%--                                </button>--%>
-
-<%--                                <button type="button" id="Kream3" onclick="categoryKream(3)" class="btn btn-primary btn-icon-split btn-sm">--%>
-<%--                                    <span class="icon text-white-50">K</span>--%>
-<%--                                    <span class="text">맨투맨</span>--%>
-<%--                                </button>--%>
-<%--                            </div>--%>
-
-<%--                            <div style="margin-top: 10px;">--%>
-<%--&lt;%&ndash;                                <button type="button" id="Naver0" onclick="categoryNaver(0)" class="btn btn-primary btn-icon-split btn-sm">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <span class="icon text-white-50">N</span>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                    <span class="text">베이프</span>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                </button>&ndash;%&gt;--%>
-
-<%--                                <button type="button" id="Naver1" onclick="categoryNaver(1)" class="btn btn-primary btn-icon-split btn-sm">--%>
-<%--                                    <span class="icon text-white-50">N</span>--%>
-<%--                                    <span class="text">반팔</span>--%>
-<%--                                </button>--%>
-
-<%--                                <button type="button" id="Naver2" onclick="categoryNaver(2)" class="btn btn-primary btn-icon-split btn-sm">--%>
-<%--                                    <span class="icon text-white-50">N</span>--%>
-<%--                                    <span class="text">후드집업</span>--%>
-<%--                                </button>--%>
-<%--                            </div>--%>
                         </form>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">test</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -211,7 +212,7 @@
             // processData: false,  //false로 선언 시 formData를 string으로 변환하지 않음
             // contentType: false,  //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
             data: $('#crawlingForm').serialize(),
-            url: "/crawling/getCrawlingKream",
+            url: "/crawling/getCrawlingProductList",
             success: function (data) {
                 if (data.success) {
                     let temp = '';
