@@ -20,9 +20,9 @@ public class CrawlingController {
      * @title 상품크롤링
      * @since 2025.01.16
      */
-    @PostMapping("/crawling/getCrawlingKream")
-    public JsonResponseObject getCrawlingKream(JsonResponseObject response, ProductParam param) throws Exception {
+    @PostMapping("/crawling/getCrawlingProductList")
+    public JsonResponseObject getCrawlingProductList(JsonResponseObject response, ProductParam param) throws Exception {
 
-        return crawlingService.getCrawlingKream(response, param);
+        return crawlingService.getCrawlingProductList(response, param);
     }
 }

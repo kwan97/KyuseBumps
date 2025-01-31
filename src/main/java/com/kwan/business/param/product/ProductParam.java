@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ProductParam {
 
-    private String category;    /**카테고리*/
+    private String searchSite;    /**사이트종류*/
     private String prodNm;
     private String description; /**설명*/
 
