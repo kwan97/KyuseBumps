@@ -111,7 +111,7 @@ public class CrawlingService {
         return mv;
     }
 
-    public JsonResponseObject getCrawlingKream(JsonResponseObject response, ProductParam param) throws Exception {
+    public JsonResponseObject getCrawlingProductList(JsonResponseObject response, ProductParam param) throws Exception {
         // 크롬 드라이버 설정
         System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 
@@ -124,38 +124,61 @@ public class CrawlingService {
 
         //크롤링 할 웹사이트 url
         WebDriver driver = new ChromeDriver(options);
+        List<WebElement> total = new ArrayList<>();
+        List<WebElement> title = new ArrayList<>();
+        List<WebElement> accessUrl = new ArrayList<>();
+        List<WebElement> imageUrl = new ArrayList<>();
+        List<WebElement> price = new ArrayList<>();
+
         if (param.getSearchText().equals("") || param.getSearchText() == null) {
-            driver.get("https://kream.co.kr/search?keyword=베이프&tab=products");
-//            driver.get("https://search.shopping.naver.com/ns/search?query=베이프&prevQuery=");
+            response.setMessage("검색할 상품을 입력해주세요.");
+            response.setSuccess(false);
+            return response;
         } else {
-            driver.get("https://kream.co.kr/search?keyword=베이프"+param.getSearchText()+"&tab=products");
+            if (param.getSearchSite().equals("naver")) {
+                driver.get("https://search.shopping.naver.com/ns/search?query="+param.getSearchText());
+
+                String url = "#composite-card-list > div > ul.compositeCardList_product_list__Ih4JR > li";
+
+                total = driver.findElements( By.cssSelector(url) );
+                accessUrl = driver.findElements( By.cssSelector(url +  "") );
+                imageUrl = driver.findElements( By.cssSelector(url +  "") );
+                price = driver.findElements( By.cssSelector(url +  "") );
+            } else if (param.getSearchSite().equals("coupang")) {
+
+            } else if (param.getSearchSite().equals("taobao")) {
+
+            } else if (param.getSearchSite().equals("lacuten")) {
+
+            }
+//            driver.get("https://kream.co.kr/search?keyword=베이프"+param.getSearchText()+"&tab=products");
         }
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 
-        //제목 크롤링
-        List<WebElement> titleList = driver.findElements( By.cssSelector("div .product_info_area .title .product_info_product_name .translated_name") );
-        //접속 URL 크롤링
-        List<WebElement> accessUrlList = driver.findElements( By.cssSelector("div .search_result_item .product_card > a") );
-        //가격 크롤링
-        List<WebElement> priceList = driver.findElements( By.cssSelector("div .price .amount") );
-        //이미지 크롤링
-        List<WebElement> imageUrlList = driver.findElements( By.cssSelector("div .product .product_img .image") );
+//        //제목 크롤링
+//        List<WebElement> titleList = driver.findElements( By.cssSelector("div .product_info_area .title .product_info_product_name .translated_name") );
+//        //접속 URL 크롤링
+//        List<WebElement> accessUrlList = driver.findElements( By.cssSelector("div .search_result_item .product_card > a") );
+//        //가격 크롤링
+//        List<WebElement> priceList = driver.findElements( By.cssSelector("div .price .amount") );
+//        //이미지 크롤링
+//        List<WebElement> imageUrlList = driver.findElements( By.cssSelector("div .product .product_img .image") );
 
-        List<CrawlingProductModel> crawlingModelList = new ArrayList<>();
+//        List<CrawlingProductModel> crawlingModelList = new ArrayList<>();
 
-        for (int i = 0; i < titleList.size(); i++) {
-            CrawlingProductModel model = new CrawlingProductModel();
-            model.setTitle(titleList.get(i).getText());
-            model.setPrice(priceList.get(i).getText());
-            model.setImageUrl(imageUrlList.get(i).getAttribute("src"));
-            model.setAccessUrl(accessUrlList.get(i).getAttribute("href"));
-
-            crawlingModelList.add(model);
-        }
+//        for (int i = 0; i < titleList.size(); i++) {
+//            CrawlingProductModel model = new CrawlingProductModel();
+//            model.setTitle(titleList.get(i).getText());
+//            model.setPrice(priceList.get(i).getText());
+//            model.setImageUrl(imageUrlList.get(i).getAttribute("src"));
+//            model.setAccessUrl(accessUrlList.get(i).getAttribute("href"));
+//
+//            crawlingModelList.add(model);
+//        }
         driver.quit();
 
-        if (crawlingModelList.size() > 0) {
-            response.addResultMapItem("crawlingModelList", crawlingModelList);
+        if (total.size() > 0) {
+            response.addResultMapItem("crawlingModelList", total);
             response.setMessage("크롤링 성공");
             response.setSuccess(true);
         } else {
