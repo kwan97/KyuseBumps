@@ -7,7 +7,10 @@ import lombok.Setter;
 @Setter
 public class ProductModel {
 
-    private String category;    /**카테고리*/
     private String prodNm;
+    private String price;
+    private String stock;       /**재고*/
+    private String imageUrls;
     private String description; /**설명*/
+    private String category;    /**카테고리*/
 }
