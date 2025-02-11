@@ -55,6 +55,8 @@ dependencies {
 	implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
 	implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.1.4'
 
+	implementation 'org.apache.httpcomponents.client5:httpclient5:5.1.3'
+	implementation 'org.json:json:20210307'
 }
 
 tasks.named('test') {
